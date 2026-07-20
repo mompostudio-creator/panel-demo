@@ -139,14 +139,14 @@ export function QuotesTable() {
 
   return (
     <div>
-      <div className="flex items-start justify-between gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Presupuestos</h1>
           <p className="text-sm text-ink-secondary mt-1.5">Crea, envía y gestiona todos los presupuestos de tratamiento.</p>
         </div>
         <button
           onClick={() => setAddOpen(true)}
-          className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-accent text-white text-sm font-medium rounded-xl shadow-sm hover:opacity-90 transition-all duration-150 shrink-0"
+          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-accent text-white text-sm font-medium rounded-xl shadow-sm hover:opacity-90 transition-all duration-150 sm:shrink-0"
         >
           <Plus size={15} />
           Nuevo presupuesto
@@ -154,7 +154,7 @@ export function QuotesTable() {
       </div>
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
-        <div className="flex gap-1 bg-plane rounded-lg p-1">
+        <div className="flex gap-1 bg-plane rounded-lg p-1 max-w-full overflow-x-auto">
           {TABS.map((t) => (
             <button
               key={t}
@@ -163,7 +163,7 @@ export function QuotesTable() {
                 setPage(1);
                 setSelectedId(null);
               }}
-              className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md transition-colors ${
+              className={`shrink-0 inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-md transition-colors ${
                 tab === t ? "bg-accent text-white shadow-sm" : "text-ink-secondary hover:text-ink"
               }`}
             >
@@ -248,7 +248,7 @@ export function QuotesTable() {
       )}
 
       <div className="grid lg:grid-cols-[1fr_400px] gap-6 items-start">
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden min-w-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-sm table-fixed">
               <thead>

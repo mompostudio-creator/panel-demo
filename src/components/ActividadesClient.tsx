@@ -185,12 +185,12 @@ export function ActividadesClient() {
       </div>
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
-        <div className="flex gap-1 bg-plane rounded-lg p-1">
+        <div className="flex gap-1 bg-plane rounded-lg p-1 max-w-full overflow-x-auto">
           {STATUS_FILTERS.map((s) => (
             <button
               key={s}
               onClick={() => setStatusFilter(s)}
-              className={`text-xs font-medium px-3 py-1.5 rounded-md transition-colors ${
+              className={`shrink-0 text-xs font-medium px-3 py-1.5 rounded-md transition-colors ${
                 statusFilter === s ? "bg-accent text-white shadow-sm" : "text-ink-secondary hover:text-ink"
               }`}
             >
@@ -285,7 +285,7 @@ export function ActividadesClient() {
       </div>
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-6 items-start">
-        <div className="space-y-3">
+        <div className="space-y-3 min-w-0">
           {sortedOffsets.length === 0 && (
             <div className="h-32 rounded-2xl border border-dashed border-border flex items-center justify-center">
               <span className="text-sm text-ink-muted">No hay actividades que coincidan con los filtros</span>
@@ -323,7 +323,8 @@ export function ActividadesClient() {
 
                 {isOpen && (
                   <div className="border-t border-border">
-                    <table className="w-full text-sm table-fixed">
+                    <div className="overflow-x-auto">
+                    <table className="w-full min-w-[566px] text-sm table-fixed">
                       <thead>
                         <tr className="text-left text-xs font-medium text-ink-muted border-b border-border">
                           <th className="py-2.5 px-5">Actividad</th>
@@ -418,6 +419,7 @@ export function ActividadesClient() {
                         })}
                       </tbody>
                     </table>
+                    </div>
                     {totalPages > 1 && (
                       <div className="flex items-center justify-between px-5 py-3 border-t border-border">
                         <p className="text-xs text-ink-muted">

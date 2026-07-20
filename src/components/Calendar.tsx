@@ -111,8 +111,8 @@ export function Calendar({ initialDate }: { initialDate: string }) {
   const visibleProfessionals = professionalFilter === "Todos" ? PROFESSIONALS.map((p) => p.name) : [professionalFilter];
 
   return (
-    <div className="flex gap-6 items-start">
-      <div className="flex-1 min-w-0">
+    <div className="flex flex-col lg:flex-row gap-6 items-start">
+      <div className="w-full min-w-0 lg:flex-1">
         <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
           <div className="flex items-center gap-2">
             <button
@@ -141,7 +141,7 @@ export function Calendar({ initialDate }: { initialDate: string }) {
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <div className="flex gap-1 bg-plane rounded-lg p-1">
               {(["day", "week", "month"] as View[]).map((v) => (
                 <button
@@ -164,7 +164,8 @@ export function Calendar({ initialDate }: { initialDate: string }) {
                 }`}
               >
                 <SlidersHorizontal size={13} />
-                {professionalFilter === "Todos" ? "Todos los profesionales" : professionalFilter}
+                <span className="hidden sm:inline">{professionalFilter === "Todos" ? "Todos los profesionales" : professionalFilter}</span>
+                <span className="sm:hidden">{professionalFilter === "Todos" ? "Profesional" : professionalFilter}</span>
               </button>
               {profFilterOpen && (
                 <>

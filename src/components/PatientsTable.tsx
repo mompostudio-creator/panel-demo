@@ -140,12 +140,12 @@ export function PatientsTable() {
 
   return (
     <>
-      <div className="flex items-start justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Pacientes</h1>
           <p className="text-sm text-ink-secondary mt-1.5">Gestiona todos los pacientes de tu clínica.</p>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:shrink-0">
           <div className="relative">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted pointer-events-none" />
             <input
@@ -155,59 +155,61 @@ export function PatientsTable() {
                 setPage(1);
               }}
               placeholder="Buscar paciente, teléfono, email…"
-              className="pl-9 pr-3 py-2.5 w-64 rounded-xl border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-colors"
+              className="pl-9 pr-3 py-2.5 w-full sm:w-64 rounded-xl border border-border bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-colors"
             />
           </div>
-          <div className="relative">
-            <button
-              onClick={() => setFiltersOpen((v) => !v)}
-              className={`inline-flex items-center gap-1.5 px-4 py-2.5 border text-sm font-medium rounded-xl transition-colors ${
-                statusFilter !== "Todos" ? "border-accent text-accent bg-accent-light" : "border-border text-ink-secondary hover:bg-plane"
-              }`}
-            >
-              <SlidersHorizontal size={14} />
-              Filtros
-            </button>
-            {filtersOpen && (
-              <>
-                <div className="fixed inset-0 z-10" onClick={() => setFiltersOpen(false)} />
-                <div className="absolute right-0 mt-1 w-48 bg-surface border border-border rounded-xl shadow-lg z-20 py-1.5">
-                  <button
-                    onClick={() => {
-                      setStatusFilter("Todos");
-                      setPage(1);
-                      setFiltersOpen(false);
-                    }}
-                    className="w-full text-left px-3.5 py-2 text-sm hover:bg-plane flex items-center justify-between gap-2"
-                  >
-                    Todos los estados
-                    {statusFilter === "Todos" && <Check size={13} className="text-accent" />}
-                  </button>
-                  {CLIENT_STATUSES.map((s) => (
+          <div className="flex items-center gap-2">
+            <div className="relative flex-1 sm:flex-none">
+              <button
+                onClick={() => setFiltersOpen((v) => !v)}
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 border text-sm font-medium rounded-xl transition-colors ${
+                  statusFilter !== "Todos" ? "border-accent text-accent bg-accent-light" : "border-border text-ink-secondary hover:bg-plane"
+                }`}
+              >
+                <SlidersHorizontal size={14} />
+                Filtros
+              </button>
+              {filtersOpen && (
+                <>
+                  <div className="fixed inset-0 z-10" onClick={() => setFiltersOpen(false)} />
+                  <div className="absolute right-0 mt-1 w-48 bg-surface border border-border rounded-xl shadow-lg z-20 py-1.5">
                     <button
-                      key={s}
                       onClick={() => {
-                        setStatusFilter(s);
+                        setStatusFilter("Todos");
                         setPage(1);
                         setFiltersOpen(false);
                       }}
                       className="w-full text-left px-3.5 py-2 text-sm hover:bg-plane flex items-center justify-between gap-2"
                     >
-                      {s}
-                      {statusFilter === s && <Check size={13} className="text-accent" />}
+                      Todos los estados
+                      {statusFilter === "Todos" && <Check size={13} className="text-accent" />}
                     </button>
-                  ))}
-                </div>
-              </>
-            )}
+                    {CLIENT_STATUSES.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => {
+                          setStatusFilter(s);
+                          setPage(1);
+                          setFiltersOpen(false);
+                        }}
+                        className="w-full text-left px-3.5 py-2 text-sm hover:bg-plane flex items-center justify-between gap-2"
+                      >
+                        {s}
+                        {statusFilter === s && <Check size={13} className="text-accent" />}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+            <button
+              onClick={() => setAddOpen(true)}
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-accent text-white text-sm font-medium rounded-xl shadow-sm hover:opacity-90 transition-all duration-150"
+            >
+              <Plus size={15} />
+              Nuevo paciente
+            </button>
           </div>
-          <button
-            onClick={() => setAddOpen(true)}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-accent text-white text-sm font-medium rounded-xl shadow-sm hover:opacity-90 transition-all duration-150"
-          >
-            <Plus size={15} />
-            Nuevo paciente
-          </button>
         </div>
       </div>
 
@@ -234,7 +236,8 @@ export function PatientsTable() {
       </div>
 
       <Card className="overflow-hidden">
-        <table className="w-full text-sm">
+        <div className="overflow-x-auto">
+        <table className="w-full text-sm min-w-[720px]">
           <thead>
             <tr className="text-left text-xs font-medium text-ink-muted border-b border-border">
               <th className="py-3 px-6">Paciente</th>
@@ -358,6 +361,7 @@ export function PatientsTable() {
             )}
           </tbody>
         </table>
+        </div>
 
         {filteredClients.length > 0 && (
           <div className="flex items-center justify-between px-6 py-3.5 border-t border-border">

@@ -175,7 +175,7 @@ export function InvoicesTable() {
       </div>
 
       <div className="flex flex-wrap items-center gap-2 mb-5">
-        <div className="flex gap-1 bg-plane rounded-lg p-1">
+        <div className="flex gap-1 bg-plane rounded-lg p-1 max-w-full overflow-x-auto">
           {TABS.map((t) => (
             <button
               key={t}
@@ -183,7 +183,7 @@ export function InvoicesTable() {
                 setTab(t);
                 setPage(1);
               }}
-              className={`text-xs font-medium px-3 py-1.5 rounded-md transition-colors ${
+              className={`shrink-0 text-xs font-medium px-3 py-1.5 rounded-md transition-colors ${
                 tab === t ? "bg-accent text-white shadow-sm" : "text-ink-secondary hover:text-ink"
               }`}
             >
@@ -267,7 +267,7 @@ export function InvoicesTable() {
       )}
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-6 items-start">
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden min-w-0">
           <div className="overflow-x-auto">
           <table className="w-full min-w-[760px] text-sm table-fixed">
             <thead>

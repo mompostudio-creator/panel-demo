@@ -116,7 +116,7 @@ export function PipelineBoard({ stages }: { stages: PipelineStage[] }) {
         <StatTile label="Perdidos" value={String(lostCount)} icon={XCircle} tone="critical" />
       </div>
 
-      <div className="overflow-x-auto pb-4 -mx-10 px-10">
+      <div className="overflow-x-auto pb-4 -mx-4 px-4 md:-mx-10 md:px-10">
         <div className="flex items-stretch gap-4 min-w-max">
           {visibleStages.map((stage) => {
             const stageCards = pipelineCards.filter((c) => c.stageId === stage.id);

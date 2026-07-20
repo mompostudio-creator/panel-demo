@@ -76,8 +76,12 @@ export function AgendaDaySchedule({
     byProfessional.get(a.professionalName)!.push(a);
   }
 
+  const scheduleMinWidth = professionals.length * 150 + 64;
+
   return (
     <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(11,11,11,0.04),0_1px_1px_rgba(11,11,11,0.03)]">
+      <div className="overflow-x-auto">
+      <div style={{ minWidth: scheduleMinWidth }}>
       <div className="flex border-b border-border">
         <div className="w-16 shrink-0" />
         {professionals.map((name) => {
@@ -154,6 +158,8 @@ export function AgendaDaySchedule({
         {hoverY !== null && (
           <div className="absolute left-16 right-0 h-px bg-critical z-10 pointer-events-none" style={{ top: hoverY }} />
         )}
+      </div>
+      </div>
       </div>
     </div>
   );

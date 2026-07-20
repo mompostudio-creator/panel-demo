@@ -257,7 +257,8 @@ export function AgendaList() {
         </div>
       ) : (
         <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-[0_1px_2px_rgba(11,11,11,0.04),0_1px_1px_rgba(11,11,11,0.03)]">
-          <table className="w-full text-sm table-fixed">
+          <div className="overflow-x-auto">
+          <table className="w-full min-w-[910px] text-sm table-fixed">
             <thead>
               <tr className="text-left text-xs font-medium text-ink-muted border-b border-border">
                 <th className="py-3 pl-6 pr-4 whitespace-nowrap w-[150px]">
@@ -380,6 +381,7 @@ export function AgendaList() {
               })}
             </tbody>
           </table>
+          </div>
 
           <div className="flex items-center justify-between px-5 py-3.5 border-t border-border">
             <p className="text-xs text-ink-muted">

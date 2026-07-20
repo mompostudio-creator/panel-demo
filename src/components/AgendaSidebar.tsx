@@ -36,7 +36,7 @@ export function AgendaSidebar({
     totalMinutes === 0 ? "0h" : totalMinutes % 60 === 0 ? `${totalMinutes / 60}h` : `${(totalMinutes / 60).toFixed(1)}h`;
 
   return (
-    <div className="w-72 shrink-0 space-y-5">
+    <div className="w-full lg:w-72 lg:shrink-0 space-y-5">
       <div className="bg-surface border border-border rounded-2xl p-4">
         <div className="flex items-center justify-between mb-3">
           <p className="text-sm font-semibold">

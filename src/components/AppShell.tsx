@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Home,
   LayoutDashboard,
@@ -26,6 +27,8 @@ import {
   Mail,
   MessageCircle,
   UserCircle,
+  Menu,
+  X,
 } from "lucide-react";
 
 const INICIO_ITEM = { href: "/inicio", label: "Inicio", icon: Home };
@@ -90,10 +93,45 @@ export function AppShell({
   onLogout: () => void;
 }) {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <div className="flex min-h-screen bg-plane">
-      <aside className="w-64 shrink-0 flex flex-col z-10 bg-surface border-r border-border">
+      {/* Mobile top bar — only visible below md, desktop is untouched */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-4 h-14 bg-surface border-b border-border">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg shrink-0 flex items-center justify-center bg-gradient-to-br from-accent to-violet">
+            <Sparkles size={14} strokeWidth={2.25} className="text-white" />
+          </div>
+          <p className="font-semibold text-sm leading-tight text-ink">{companyName}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen((v) => !v)}
+          aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          className="p-2 rounded-lg text-ink-secondary hover:bg-black/[0.04]"
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* Backdrop — only shown on mobile while the menu is open */}
+      {mobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-black/40"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      <aside
+        className={`w-64 shrink-0 flex flex-col bg-surface border-r border-border fixed inset-y-0 left-0 z-50 transform transition-transform duration-200 ease-in-out md:relative md:z-10 md:translate-x-0 ${
+          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
         <div className="px-6 pt-8 pb-7 flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg shrink-0 flex items-center justify-center bg-gradient-to-br from-accent to-violet">
             <Sparkles size={16} strokeWidth={2.25} className="text-white" />
@@ -176,7 +214,7 @@ export function AppShell({
         </div>
       </aside>
 
-      <main className="flex-1 min-w-0 px-10 pt-12 pb-8">{children}</main>
+      <main className="flex-1 min-w-0 px-4 pt-20 pb-8 md:px-10 md:pt-12">{children}</main>
     </div>
   );
 }

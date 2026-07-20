@@ -273,7 +273,7 @@ export function DashboardClient() {
 
   return (
     <div className="space-y-8 max-w-6xl">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">
             {getGreeting()}, {CLIENT_BUSINESS_NAME} 👋
@@ -283,7 +283,7 @@ export function DashboardClient() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-2 sm:shrink-0">
           <label className="flex items-center gap-2 bg-surface border border-border rounded-xl px-3 py-2 cursor-pointer">
             <Calendar size={14} className="text-ink-muted shrink-0" />
             <input
